@@ -1,0 +1,4 @@
+F:\代码\工作项目\斯玛特\控制柜系统\有线采集工具\trunk\bin\WSN.Protocal.Tts.dll
+F:\代码\工作项目\斯玛特\控制柜系统\有线采集工具\trunk\bin\WSN.Protocal.Tts.pdb
+F:\代码\工作项目\斯玛特\控制柜系统\有线采集工具\trunk\src\WSN.Protocal.Tts\obj\Debug\WSN.Protocal.Tts.dll
+F:\代码\工作项目\斯玛特\控制柜系统\有线采集工具\trunk\src\WSN.Protocal.Tts\obj\Debug\WSN.Protocal.Tts.pdb

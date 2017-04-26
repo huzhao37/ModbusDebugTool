@@ -1,0 +1,352 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5554515A-63BB-4F02-8817-7D2A6CED486F}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ModbusDebugTool</RootNamespace>
+    <AssemblyName>ModbusDebugTool</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>modbus.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevComponents.DotNetBar2, Version=7.0.0.4, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\DevComponents.DotNetBar2.dll</HintPath>
+    </Reference>
+    <Reference Include="IrisSkin2">
+      <HintPath>bin\Debug\skin\IrisSkin2.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="NewLife.Core">
+      <HintPath>..\packages\NewLife.Core.5.3.5577.35714\lib\net40\NewLife.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="NewLife.Net">
+      <HintPath>..\packages\NewLife.Net.3.0.5575.28271\lib\net40\NewLife.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Core\LEDProtocol\Check.cs" />
+    <Compile Include="Core\LEDProtocol\Close.cs" />
+    <Compile Include="Core\LEDProtocol\Helper.cs" />
+    <Compile Include="Core\LEDProtocol\Ledaccess.cs" />
+    <Compile Include="Core\LEDProtocol\LedEnum.cs" />
+    <Compile Include="Core\LEDProtocol\Open.cs" />
+    <Compile Include="Core\LEDProtocol\SendRam.cs" />
+    <Compile Include="Core\LEDProtocol\SendRom.cs" />
+    <Compile Include="Core\Log.cs" />
+    <Compile Include="Core\PingHelper.cs" />
+    <Compile Include="Core\TTSProtocal\InitOKResponse.cs" />
+    <Compile Include="Core\TTSProtocal\Interface.cs" />
+    <Compile Include="Core\TTSProtocal\PauseSpeechSynthesis.cs" />
+    <Compile Include="Core\TTSProtocal\PowerDown.cs" />
+    <Compile Include="Core\TTSProtocal\ResumeSpeechSynthesis.cs" />
+    <Compile Include="Core\TTSProtocal\SpeechSynthesis.cs" />
+    <Compile Include="Core\TTSProtocal\SpeechSynthesisFailResponse.cs" />
+    <Compile Include="Core\TTSProtocal\SpeechSynthesisOKResponse.cs" />
+    <Compile Include="Core\TTSProtocal\SpeechSynthesisStop.cs" />
+    <Compile Include="Core\TTSProtocal\SystemBusy.cs" />
+    <Compile Include="Core\TTSProtocal\SystemIdle.cs" />
+    <Compile Include="Core\TTSProtocal\SystemView.cs" />
+    <Compile Include="Core\TTSProtocal\TtsEntity.cs" />
+    <Compile Include="Core\TTSProtocal\TtsFunction.cs" />
+    <Compile Include="DeviceDebugTool.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DeviceDebugTool.Designer.cs">
+      <DependentUpon>DeviceDebugTool.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LED\Led.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LED\Led.Designer.cs">
+      <DependentUpon>Led.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RTUTest\AIManageWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RTUTest\AIManageWindow.Designer.cs">
+      <DependentUpon>AIManageWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SensorTest\CO2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SensorTest\CO2.Designer.cs">
+      <DependentUpon>CO2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Core\BaseConfig.cs" />
+    <Compile Include="Core\ModbusProtocol.cs" />
+    <Compile Include="RTUTest\DIManageWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RTUTest\DIManageWindow.Designer.cs">
+      <DependentUpon>DIManageWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RTUTest\DOManageWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RTUTest\DOManageWindow.Designer.cs">
+      <DependentUpon>DOManageWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HandCommand\HandTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HandCommand\HandTest.Designer.cs">
+      <DependentUpon>HandTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modbus管理工具.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modbus管理工具.Designer.cs">
+      <DependentUpon>Modbus管理工具.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SensorTest\PoisonGass.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SensorTest\PoisonGass.Designer.cs">
+      <DependentUpon>PoisonGass.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RTUTest\ReadAndWriteCoilStatus.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RTUTest\ReadAndWriteCoilStatus.Designer.cs">
+      <DependentUpon>ReadAndWriteCoilStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RTUTest\ReadAndWriteCoilStatus0002.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RTUTest\ReadAndWriteCoilStatus0002.Designer.cs">
+      <DependentUpon>ReadAndWriteCoilStatus0002.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SensorTest\RTUCollectSensor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SensorTest\RTUCollectSensor.Designer.cs">
+      <DependentUpon>RTUCollectSensor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Common\SensorCommonSet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Common\SensorCommonSet.Designer.cs">
+      <DependentUpon>SensorCommonSet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Core\SkinClass.cs" />
+    <Compile Include="RTUTest\SRC0001.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RTUTest\SRC0001.Designer.cs">
+      <DependentUpon>SRC0001.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Common\BaseSet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Common\BaseSet.Designer.cs">
+      <DependentUpon>BaseSet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RTUTest\SRC0001Combination.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RTUTest\SRC0001Combination.Designer.cs">
+      <DependentUpon>SRC0001Combination.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Common\SRCCommonSet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Common\SRCCommonSet.Designer.cs">
+      <DependentUpon>SRCCommonSet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SensorTest\TempHumi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SensorTest\TempHumi.Designer.cs">
+      <DependentUpon>TempHumi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Core\TransportEnum.cs" />
+    <Compile Include="Core\TransportFactory.cs" />
+    <Compile Include="SensorTest\WeatherStation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SensorTest\WeatherStation.Designer.cs">
+      <DependentUpon>WeatherStation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TTS\Tts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TTS\Tts.Designer.cs">
+      <DependentUpon>Tts.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="DeviceDebugTool.resx">
+      <DependentUpon>DeviceDebugTool.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LED\Led.resx">
+      <DependentUpon>Led.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RTUTest\AIManageWindow.resx">
+      <DependentUpon>AIManageWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SensorTest\CO2.resx">
+      <DependentUpon>CO2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RTUTest\DIManageWindow.resx">
+      <DependentUpon>DIManageWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RTUTest\DOManageWindow.resx">
+      <DependentUpon>DOManageWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HandCommand\HandTest.resx">
+      <DependentUpon>HandTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modbus管理工具.resx">
+      <DependentUpon>Modbus管理工具.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SensorTest\PoisonGass.resx">
+      <DependentUpon>PoisonGass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RTUTest\ReadAndWriteCoilStatus.resx">
+      <DependentUpon>ReadAndWriteCoilStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RTUTest\ReadAndWriteCoilStatus0002.resx">
+      <DependentUpon>ReadAndWriteCoilStatus0002.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SensorTest\RTUCollectSensor.resx">
+      <DependentUpon>RTUCollectSensor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Common\SensorCommonSet.resx">
+      <DependentUpon>SensorCommonSet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RTUTest\SRC0001.resx">
+      <DependentUpon>SRC0001.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="Common\BaseSet.resx">
+      <DependentUpon>BaseSet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RTUTest\SRC0001Combination.resx">
+      <DependentUpon>SRC0001Combination.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Common\SRCCommonSet.resx">
+      <DependentUpon>SRCCommonSet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SensorTest\TempHumi.resx">
+      <DependentUpon>TempHumi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SensorTest\WeatherStation.resx">
+      <DependentUpon>WeatherStation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TTS\Tts.resx">
+      <DependentUpon>Tts.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Core\TTSProtocal\ClassDiagram1.cd" />
+    <None Include="Core\TTSProtocal\obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="Core\TTSProtocal\obj\Debug\WSN.Protocal.Tts.csprojResolveAssemblyReference.cache" />
+    <None Include="Core\TTSProtocal\obj\Release\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="Core\TTSProtocal\obj\Release\Smart.Protocal.Tts.csprojResolveAssemblyReference.cache" />
+    <None Include="Core\TTSProtocal\packages.config" />
+    <None Include="Core\TTSProtocal\文档\XF-S4240中文语音合成模块开发指南.pdf" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\TTSProtocal\bin\Release\NewLife.Core.dll" />
+    <Content Include="Core\TTSProtocal\bin\Release\NewLife.Core.pdb" />
+    <Content Include="Core\TTSProtocal\bin\Release\NewLife.Core.xml" />
+    <Content Include="Core\TTSProtocal\bin\Release\Smart.Protocal.Tts.dll" />
+    <Content Include="Core\TTSProtocal\bin\Release\Smart.Protocal.Tts.pdb" />
+    <Content Include="Core\TTSProtocal\obj\Debug\Smart.Protocal.Tts.csproj.FileListAbsolute.txt" />
+    <Content Include="Core\TTSProtocal\obj\Debug\Smart.Protocal.Tts.dll" />
+    <Content Include="Core\TTSProtocal\obj\Debug\Smart.Protocal.Tts.pdb" />
+    <Content Include="Core\TTSProtocal\obj\Debug\WSN.Protocal.Tts.csproj.FileListAbsolute.txt" />
+    <Content Include="Core\TTSProtocal\obj\Debug\WSN.Protocal.Tts.dll" />
+    <Content Include="Core\TTSProtocal\obj\Debug\WSN.Protocal.Tts.pdb" />
+    <Content Include="Core\TTSProtocal\obj\Release\Smart.Protocal.Tts.csproj.FileListAbsolute.txt" />
+    <Content Include="Core\TTSProtocal\obj\Release\Smart.Protocal.Tts.dll" />
+    <Content Include="Core\TTSProtocal\obj\Release\Smart.Protocal.Tts.pdb" />
+    <Content Include="Core\TTSProtocal\Smart.Protocal.Tts.csproj" />
+    <Content Include="Core\TTSProtocal\Smart.Protocal.Tts.csproj.user" />
+    <Content Include="image\logo.ico" />
+    <Content Include="image\背景.jpg" />
+    <Content Include="modbus.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Core\TTSProtocal\obj\Debug\TempPE\" />
+    <Folder Include="Core\TTSProtocal\obj\Release\TempPE\" />
+    <Folder Include="Core\TTSProtocal\Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="IWshRuntimeLibrary">
+      <Guid>{F935DC20-1CF0-11D0-ADB9-00C04FD58A0B}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

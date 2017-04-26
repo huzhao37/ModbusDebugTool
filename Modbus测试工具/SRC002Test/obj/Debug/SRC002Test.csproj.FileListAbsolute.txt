@@ -1,0 +1,9 @@
+d:\users\admin\documents\visual studio 2013\Projects\SRC002Test\SRC002Test\bin\Debug\SRC002Test.exe.config
+d:\users\admin\documents\visual studio 2013\Projects\SRC002Test\SRC002Test\bin\Debug\SRC002Test.exe
+d:\users\admin\documents\visual studio 2013\Projects\SRC002Test\SRC002Test\bin\Debug\SRC002Test.pdb
+d:\users\admin\documents\visual studio 2013\Projects\SRC002Test\SRC002Test\obj\Debug\SRC002Test.csprojResolveAssemblyReference.cache
+d:\users\admin\documents\visual studio 2013\Projects\SRC002Test\SRC002Test\obj\Debug\SRC002Test.SRC002.resources
+d:\users\admin\documents\visual studio 2013\Projects\SRC002Test\SRC002Test\obj\Debug\SRC002Test.Properties.Resources.resources
+d:\users\admin\documents\visual studio 2013\Projects\SRC002Test\SRC002Test\obj\Debug\SRC002Test.csproj.GenerateResource.Cache
+d:\users\admin\documents\visual studio 2013\Projects\SRC002Test\SRC002Test\obj\Debug\SRC002Test.exe
+d:\users\admin\documents\visual studio 2013\Projects\SRC002Test\SRC002Test\obj\Debug\SRC002Test.pdb

@@ -1,0 +1,263 @@
+c# 程序皮肤控件2008-09-12 16:16Visual Studio 2005工具箱上右击选择“选择项”，慢慢等...
+在弹出的“选择工具箱项”选项卡中，点击“浏览”，找到IrisSkin2.dll存放的位置，双击，
+你会发现多了个“SkinEngine”，确定。
+将公共控件里的“SkinEngine”，拖到窗体上，将皮肤文件*.ssk在“解决方案资源管理器”中
+添加到bin文件夹下的Debug文件夹下。(先复制皮肤文件*.ssk，在Debug文件夹上右击“粘贴”)
+在初始化时加上一句：
+
+
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Text;
+using System.Windows.Forms;
+
+
+
+namespace WindowsApplication1
+{
+       public partial class Form1 : Form
+       {
+           public Form1()
+           {
+               InitializeComponent();
+            this.skinEngine1.SkinFile = "*.ssk";
+           }
+
+
+
+           private void Form1_Load(object sender, EventArgs e)
+           {
+
+
+
+           }
+       }
+}
+
+恢复默认皮肤请将红色语句注释或删除
+
+
+
+先前贴的这篇文章大家可能觉的不太能理解，我注释也确实写的很少，步骤也不是很详细，现在重修改一下，希望大家能指正。 
+
+1：控件（破解版，只限.Net2005）和皮肤下载地址如下（用影音传送带等下载工具下载）： 
+
+http://download1.csdn.net/down3/20070605/05142029888.rar 
+
+DEMO程序（含源码） 
+
+http://dl2.csdn.net/down4/20070628/28181121698.rar 
+
+2：载入 
+
+下载后的rar文件里有一个IrisSkin2.dll和一个skin文件夹。 
+
+添加引用，将IrisSkin2.dll引用进项目中。 
+
+然后在解决方案资源管理器里右击项目→添加→新建文件夹，文件夹名为skin。 
+
+建完skin文件夹后再右击这个文件夹→添加→现有项，在弹出的文件选择框里选*.*所有文件，再把解压出来的skin文件夹里的所有文件全选进去。 
+
+这时候我们可以看到skin文件夹里已经有了我们添加的所有的换肤文件了。再按ctrl键选中所有的skin文件夹里的文件，在属性栏里可以看到“生成操作”一栏，默认选项是“无”，我们把它改成“嵌入的资源”。 
+
+3：类 
+
+下面我们新建一个类，把以下的代码复制进去，别忘了把命名空间改成你自己的。 
+
+using System; 
+using System.Collections.Generic; 
+using System.Text; 
+using System.Windows.Forms; 
+using System.Data; 
+
+//TestSkin命令空间，别忘了改成你自己的。 
+namespace TestSkin 
+{ 
+     class SkinClass 
+     { 
+         public static Sunisoft.IrisSkin.SkinEngine se = null; 
+         /// <summary> 
+         /// 增加换肤菜单 
+         /// </summary> 
+         /// <param name="toolMenu"></param> 
+         public static void AddSkinMenu(ToolStripMenuItem toolMenu) 
+         { 
+             DataSet skin = new DataSet(); 
+             try 
+             { 
+
+                 skin.ReadXml("skin.xml", XmlReadMode.Auto); 
+             } 
+             catch 
+             { 
+
+             } 
+             if (skin == null || skin.Tables.Count < 1) 
+             { 
+                 skin = new DataSet(); 
+                 skin.Tables.Add("skin"); 
+                 skin.Tables["skin"].Columns.Add("style"); 
+                 System.Data.DataRow dr = skin.Tables["skin"].NewRow(); 
+                 dr[0] = "系统默认"; 
+                 skin.Tables[0].Rows.Add(dr); 
+                 skin.WriteXml("skin.xml", XmlWriteMode.IgnoreSchema); 
+             } 
+             foreach (SkinType st in (SkinType[])System.Enum.GetValues(typeof(SkinType))) 
+             { 
+                 toolMenu.DropDownItems.Add(new ToolStripMenuItem(st.ToString())); 
+
+                 toolMenu.DropDownItems[toolMenu.DropDownItems.Count - 1].Click += new EventHandler(frm_Main_Click); 
+                 if (st.ToString() == skin.Tables[0].Rows[0][0].ToString()) 
+                 { 
+                     ((ToolStripMenuItem)toolMenu.DropDownItems[toolMenu.DropDownItems.Count - 1]).Checked = true; 
+                     frm_Main_Click(toolMenu.DropDownItems[toolMenu.DropDownItems.Count - 1], null); 
+
+                 } 
+
+             } 
+
+             toolMenu.DropDownItems.Add(new ToolStripMenuItem("系统默认")); 
+             toolMenu.DropDownItems[toolMenu.DropDownItems.Count - 1].Click += new EventHandler(frm_Main_Click); 
+             if (skin.Tables[0].Rows[0][0].ToString() == "系统默认") 
+             { 
+                 ((ToolStripMenuItem)toolMenu.DropDownItems[toolMenu.DropDownItems.Count - 1]).Checked = true; 
+             } 
+         } 
+         static void frm_Main_Click(object sender, EventArgs e) 
+         { 
+
+             for (int i = 0; i < ((ToolStripMenuItem)((ToolStripMenuItem)sender).OwnerItem).DropDownItems.Count; i++) 
+             { 
+                 if (((ToolStripMenuItem)sender).Text == ((ToolStripMenuItem)((ToolStripMenuItem)sender).OwnerItem).DropDownItems[i].Text) 
+                 { 
+                     ((ToolStripMenuItem)sender).CheckState = CheckState.Checked; 
+                     DataSet skin = new DataSet(); 
+                     skin.Tables.Add("skin"); 
+                     skin.Tables["skin"].Columns.Add("style"); 
+                     System.Data.DataRow dr = skin.Tables["skin"].NewRow(); 
+                     dr[0] = ((ToolStripMenuItem)((ToolStripMenuItem)sender).OwnerItem).DropDownItems[i].Text; 
+                     skin.Tables[0].Rows.Add(dr); 
+                     skin.WriteXml("skin.xml", XmlWriteMode.IgnoreSchema); 
+
+                 } 
+                 else 
+                 { 
+                     ((ToolStripMenuItem)((ToolStripMenuItem)((ToolStripMenuItem)sender).OwnerItem).DropDownItems[i]).CheckState = CheckState.Unchecked; 
+                 } 
+             } 
+             if (((ToolStripMenuItem)sender).Text == "系统默认") 
+             { 
+                 RemoveSkin(); 
+                 DataSet skin = new DataSet(); 
+                 skin.Tables.Add("skin"); 
+                 skin.Tables["skin"].Columns.Add("style"); 
+                 System.Data.DataRow dr = skin.Tables["skin"].NewRow(); 
+                 dr[0] = "系统默认"; 
+                 skin.Tables[0].Rows.Add(dr); 
+                 skin.WriteXml("skin.xml", XmlWriteMode.IgnoreSchema); 
+                 return; 
+             } 
+             foreach (SkinType st in (SkinType[])System.Enum.GetValues(typeof(SkinType))) 
+             { 
+                 if (st.ToString() == ((ToolStripMenuItem)sender).Text) 
+                 { 
+                     ChangeSkin(st); 
+                     return; 
+                 } 
+             } 
+         } 
+         /// <summary> 
+         /// 改变皮肤 
+         /// </summary> 
+         /// <param name="st"></param> 
+         public static void ChangeSkin(SkinType st) 
+         { 
+             System.Reflection.Assembly thisDll = System.Reflection.Assembly.GetExecutingAssembly(); 
+             if (se == null) 
+             { 
+                 //TestSkin是指命名空间，这里你可以换成你自己的。 
+                 se = new Sunisoft.IrisSkin.SkinEngine(Application.OpenForms[0], thisDll.GetManifestResourceStream("TestSkin.skin." + st.ToString() + ".ssk")); 
+                 se.Active = true; 
+                 for (int i = 0; i < Application.OpenForms.Count; i++) 
+                 { 
+                     se.AddForm(Application.OpenForms[i]); 
+                 } 
+
+             } 
+             else 
+             { 
+                 //TestSkin是指命名空间，这里你可以换成你自己的。 
+                 se.SkinStream = thisDll.GetManifestResourceStream("TestSkin.skin." + st.ToString() + ".ssk"); 
+                 se.Active = true; 
+             } 
+         } 
+         /// <summary> 
+         /// 移除皮肤 
+         /// </summary> 
+         public static void RemoveSkin() 
+         { 
+             if (se == null) 
+             { 
+                 return; 
+             } 
+             else 
+             { 
+                 se.Active = false; 
+             } 
+         } 
+     } 
+     /// <summary> 
+     /// 换肤类型 
+     /// </summary> 
+     public enum SkinType 
+     { 
+         Calmness, 
+         DeepCyan, 
+         Eighteen, 
+         Emerald, 
+         GlassBrown, 
+         Longhorn, 
+         MacOS, 
+         Midsummer, 
+         MP10, 
+         MSN, 
+         OneBlue, 
+         Page, 
+         RealOne, 
+         Silver, 
+         SportsBlack, 
+         SteelBlack, 
+         vista1, 
+         Vista2, 
+         Warm, 
+         Wave, 
+         XPSilver 
+     } 
+} 
+
+
+4：调用 
+
+在你的主窗体里加上一个MenuStrip菜单，建一个2级菜单（如：文件→更换皮肤），然后在Form_Load事件里写上调用代码： 
+
+private void Form1_Load(object sender, EventArgs e) 
+         { 
+             //“更换皮肤ToolStripMenuItem” 是上面例子里“更换皮肤”这个ToolStripMenuItem的Name。 
+             SkinClass.AddSkinMenu(更换皮肤ToolStripMenuItem); 
+         } 
+
+5：注 
+
+以下两个方法是主要换肤用的： 
+
+ChangeSkin方法换肤 
+
+RemoveSkin方法恢复系统默认皮肤 
+
+大家可以不用直接给单独一个窗体换肤。我以上的代码是生成一个换肤菜单，然后所有的窗体都是自动进行换肤了。
+
+ 
